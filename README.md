@@ -1,2 +1,2 @@
 # theband.name
-Website
+Website to get or make band name suggestions
