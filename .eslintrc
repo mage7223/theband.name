@@ -1,0 +1,19 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "no-loops" // Disallow for/while loops while allowing map/forEach iterators
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules":{
+        // 0 == disabled, 1==warn, 2==error
+        "no-console": 0,
+        "no-loops/no-loops": 0,
+        "@typescript-eslint/no-explicit-any": ["off"]
+      }
+  }

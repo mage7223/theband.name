@@ -16,9 +16,9 @@
 			"extensions": [
 				"ms-vscode.vscode-typescript-next",
 				"apollographql.vscode-apollo",
-				//"rodrigovallades.es7-react-js-snippets",
 				"dbaeumer.vscode-eslint",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"p1c2u.docker-compose"
 			]
 		}
 	},
