@@ -11,6 +11,8 @@
  import express from "express";
  import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
  import http from 'http';
+ import reactResolver from './reactResolver';
+ import cors from 'cors';
  import * as dotenv from 'dotenv';
  
  dotenv.config()
@@ -26,8 +28,11 @@
          resolvers,
          plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
      }) as any;
+     app.use("/",reactResolver);
+     app.use(cors());
      await server.start();
      server.applyMiddleware({app});
+
      await new Promise<void>((resolve) => 
          httpServer.listen({port:LISTEN_PORT}, resolve)
      );
