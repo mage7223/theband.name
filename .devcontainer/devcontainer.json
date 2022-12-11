@@ -17,8 +17,12 @@
 				"ms-vscode.vscode-typescript-next",
 				"apollographql.vscode-apollo",
 				"dbaeumer.vscode-eslint",
-				"eamodio.gitlens",
-				"p1c2u.docker-compose"
+				"GitHub.copilot",
+				"p1c2u.docker-compose",
+				"christian-kohler.npm-intellisense",
+				"mquandalle.graphql",
+				"GitHub.codespaces",
+				"dsznajder.es7-react-js-snippets"
 			]
 		}
 	},
