@@ -1,6 +1,5 @@
 import Home from "./pages/Home";
 import About from "./pages/About";
-import GraphiQL from "./pages/GraphiQL";
 
 // other
 import {FC} from "react";
@@ -29,11 +28,4 @@ export const routes: Array<Route> = [
         enabled: true,
         component: About
     },
-    {
-        key: 'graphiql-route',
-        title: 'GraphiQL',
-        path: '/graphiql',
-        enabled: true,
-        component: GraphiQL
-    }
 ]
