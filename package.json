@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Website to get or make band name suggestions",
   "main": "index.js",
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start:dev": "npx nodemon",
@@ -27,6 +30,7 @@
     "@types/node": "^18.11.11",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
+    "babel-plugin-import-graphql": "^2.8.1",
     "eslint": "^8.29.0",
     "eslint-plugin-no-loops": "^0.3.0",
     "jest": "^29.3.1",

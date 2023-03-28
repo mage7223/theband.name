@@ -5,6 +5,7 @@ const Resolvers = {
         getBand: (_: any, args: any) => {
             return bands.find((band) => band.id === args.id);
         },
+        hello: () => "Hello World",
        
     },
 };
