@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Band } from './models/band.model';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class BandService {
@@ -16,6 +16,10 @@ export class BandService {
 
   findOne(id: FindOneOptions<Band>): Promise<Band | null> {
     return this.bandRepository.findOne(id);
+  }
+
+  findAny(filter: FindManyOptions<Band>): Promise<Band[]> {
+    return this.bandRepository.find(filter);
   }
 
   async create(name: string): Promise<Band> {

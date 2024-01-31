@@ -11,6 +11,8 @@ type Query {
   sayHello: String!
   band(id: Int!): Band!
   bands: [Band!]!
+  bandByName(name: String!): Band!
+  bandLikeName(name: String!): [Band!]!
 }
 
 type Mutation {

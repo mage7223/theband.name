@@ -19,6 +19,7 @@ import { BandSchema } from './bands/schema/band.schema';
       entities: [Band],
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     }),
     TypeOrmModule.forFeature([BandSchema]),
     GraphQLModule.forRoot<ApolloDriverConfig>({

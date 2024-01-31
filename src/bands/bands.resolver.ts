@@ -1,7 +1,7 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BandService } from './bands.service';
 import { Band } from './models/band.model';
-import { FindOneOptions } from 'typeorm';
+import { Like } from 'typeorm';
 
 @Resolver((of: any) => Band)
 export class BandResolver {
@@ -24,6 +24,24 @@ export class BandResolver {
   @Query((returns) => [Band], { name: 'bands' })
   async getAllBands() {
     return this.bandService.findAll();
+  }
+
+  @Query((returns) => Band, { name: 'bandByName' })
+  async getBandByName(@Args('name', { type: () => String }) name: string) {
+    return this.bandService.findOne({
+      where: {
+        name: `${name}`,
+      },
+    });
+  }
+
+  @Query((returns) => [Band], { name: 'bandLikeName' })
+  async getBandLikeName(@Args('name', { type: () => String }) name: string) {
+    return this.bandService.findAny({
+      where: {
+        name: Like(`%${name}%`),
+      },
+    });
   }
 
   @Mutation((returns) => Band)
