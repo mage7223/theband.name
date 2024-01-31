@@ -18,7 +18,7 @@ export class BandService {
     return this.bandRepository.findOne(id);
   }
 
-  findAny(filter: FindManyOptions<Band>): Promise<Band[]> {
+  findAny(filter: FindManyOptions<Band>): Promise<Band[] | null> {
     return this.bandRepository.find(filter);
   }
 
