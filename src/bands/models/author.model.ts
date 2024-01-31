@@ -1,17 +1,23 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {Band} from './band.model'
+import { Band } from './band.model';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
+@Entity()
 export class Author {
-    @Field(type => Int, {nullable:false})
-    id: number;
+  @PrimaryGeneratedColumn('increment')
+  @Field(() => Int, { nullable: false })
+  id: number;
 
-    @Field({nullable:false})
-    email: string;
+  @Column({ nullable: false })
+  @Field({ nullable: false })
+  email: string;
 
-    @Field({nullable:true})
-    name: string;
+  @Column()
+  @Field({ nullable: true })
+  name: string;
 
-    @Field(type=>[Band])
-    bands: Band[];
+  @Field(() => [Band])
+  @OneToMany(() => Band, (band) => band.author)
+  bands: Band[];
 }

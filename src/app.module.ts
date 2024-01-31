@@ -4,7 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { BandModule } from './bands/bands.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Band } from './bands/models/band.model';
-import { BandSchema } from './bands/schema/band.schema';
+import { Author } from './bands/models/author.model';
 
 @Module({
   imports: [
@@ -16,12 +16,11 @@ import { BandSchema } from './bands/schema/band.schema';
       username: 'postgres',
       password: 'postgres',
       database: 'postgres',
-      entities: [Band],
+      entities: [Band, Author],
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([BandSchema]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       include: [BandModule],

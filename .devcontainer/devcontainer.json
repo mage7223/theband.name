@@ -31,7 +31,7 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	 "forwardPorts": [3000, 8080, 5432,],
+	 "forwardPorts": [3000, 8080, 5432, 5050],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
@@ -41,7 +41,7 @@
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
-    "dockerComposeFile": "docker-compose.yml",
+    // "dockerComposeFile": "docker-compose.yml",
     "service": "devcontainer",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }

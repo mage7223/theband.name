@@ -9,10 +9,10 @@ An application for submitting and searching band names
 
 ```bash
 cd .devcontainer
-docker compose up
+docker compose -f docker-compose-dev.yml up -d
 cd ..
 npm install
-npm run start 
+npm run start:dev
 ```
 
 ### Popuate some bands

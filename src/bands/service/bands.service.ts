@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Band } from './models/band.model';
+import { Band } from '../models/band.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 

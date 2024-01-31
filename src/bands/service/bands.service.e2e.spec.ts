@@ -1,6 +1,6 @@
 import * as request from 'supertest';
 import { INestApplication } from '@nestjs/common';
-import { BandModule } from './bands.module';
+import { BandModule } from '../bands.module';
 import { Test } from '@nestjs/testing';
 import { BandService } from './bands.service';
 

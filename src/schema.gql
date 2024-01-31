@@ -2,19 +2,28 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Author {
+  id: Int!
+  email: String!
+  name: String
+  bands: [Band!]!
+}
+
 type Band {
   id: Int!
   name: String!
+  author: Author!
 }
 
 type Query {
-  sayHello: String!
   band(id: Int!): Band!
   bands: [Band!]!
   bandByName(name: String!): Band!
   bandLikeName(name: String!): [Band!]!
+  author(id: Int!): Author!
+  getUsers: [Author!]!
 }
 
 type Mutation {
-  createBand(name: String!): Band!
+  createBand(name: String!, email: String!): Author!
 }

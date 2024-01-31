@@ -1,15 +1,12 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BandService } from './bands.service';
-import { Band } from './models/band.model';
-import { Like } from 'typeorm';
+import { BandService } from '../service/bands.service';
+import { Band } from '../models/band.model';
+import { BaseEntity, Like } from 'typeorm';
 
 @Resolver((of: any) => Band)
-export class BandResolver {
-  constructor(private bandService: BandService) {}
-
-  @Query(() => String)
-  sayHello(): string {
-    return 'Hello World';
+export class BandResolver extends BaseEntity {
+  constructor(private bandService: BandService) {
+    super();
   }
 
   @Query((returns) => Band, { name: 'band' })
