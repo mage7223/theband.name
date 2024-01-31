@@ -7,9 +7,7 @@ import { Band } from "./models/band.model";
 export class BandResolver{
     constructor( 
         private bandService: BandService
-    ){
-
-    }
+    ){}
 
     @Query(() => String)
     sayHello():string{
