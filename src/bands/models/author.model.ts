@@ -1,12 +1,18 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Band } from './band.model';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @ObjectType()
 @Entity()
-export class Author {
+export class Author extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
-  @Field(() => Int, { nullable: false })
+  @Field((type) => Int, { nullable: false })
   id: number;
 
   @Column({ nullable: false })

@@ -77,3 +77,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## References
+
+[TypeORM](https://typeorm.io/) - ORM model used for Entity loading

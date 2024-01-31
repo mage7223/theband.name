@@ -10,17 +10,22 @@ export class AuthorResolver extends BaseEntity {
   }
 
   @Query((returns) => Author, { name: 'author' })
-  async getUserById(@Args('id', { type: () => Int }) id: number) {
-    return this.authorService.findOne({ where: { id } });
+  async getAuthorById(@Args('id', { type: () => Int }) id: number) {
+    //return this.authorService.findOne({ where: { id } });
+    // or return Author.findOne({ where: { id } });
+    return Author.createQueryBuilder()
+      .where('author.id = :id', { id })
+      .getOne();
   }
 
   @Query((returns) => [Author])
-  async getUsers() {
+  async getAuthors() {
     return this.authorService.findAll();
+    // return Author.find();
   }
 
   @Mutation((returns) => Author)
-  createBand(
+  createAuthor(
     @Args({ name: 'name', type: () => String }) name: string,
     @Args({ name: 'email', type: () => String }) email: string,
   ) {

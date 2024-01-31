@@ -21,9 +21,10 @@ type Query {
   bandByName(name: String!): Band!
   bandLikeName(name: String!): [Band!]!
   author(id: Int!): Author!
-  getUsers: [Author!]!
+  getAuthors: [Author!]!
 }
 
 type Mutation {
-  createBand(name: String!, email: String!): Author!
+  createBand(name: String!): Band!
+  createAuthor(name: String!, email: String!): Author!
 }
