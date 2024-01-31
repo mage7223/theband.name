@@ -36,6 +36,6 @@ describe('BandsService', () => {
       });
   });
   afterAll(async () => {
-    await testApp.close();
+    await testApp?.close();
   });
 });
