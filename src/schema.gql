@@ -12,3 +12,7 @@ type Query {
   band(id: Int!): Band!
   bands: [Band!]!
 }
+
+type Mutation {
+  createBand(name: String!): Band!
+}

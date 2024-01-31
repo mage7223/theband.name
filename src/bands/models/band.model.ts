@@ -1,11 +1,14 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
+@Entity()
 export class Band {
-    @Field(type => Int)
-    id: number;
+  @PrimaryGeneratedColumn('increment')
+  @Field((type) => Int)
+  id: number;
 
-    @Field({nullable: false})
-    name: string;
-
+  @Column()
+  @Field({ nullable: false })
+  name: string;
 }

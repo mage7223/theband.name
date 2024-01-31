@@ -1,31 +1,30 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Band } from './models/band.model';
-
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class BandService {
-    private Bands: Band[] = [];
+  constructor(
+    @InjectRepository(Band)
+    private bandRepository: Repository<Band>,
+  ) {}
 
-    private createBand(id: number, name:string):Band {
-        let band = new Band();
-        band.id=id;
-        band.name=name;
-        return band;
-    }
+  findAll(): Promise<Band[]> {
+    return this.bandRepository.find();
+  }
 
-    constructor(){
-        this.Bands.push(this.createBand(0, "Naught"));
-        this.Bands.push(this.createBand(1, "Frippy"));
-    }
+  findOne(id: FindOneOptions<Band>): Promise<Band | null> {
+    return this.bandRepository.findOne(id);
+  }
 
-    async getAll():Promise<Band[]>{
-        return this.Bands;
-    }
+  async create(name: string): Promise<Band> {
+    const band = new Band();
+    band.name = name;
+    return this.bandRepository.save(band);
+  }
 
-    async getById(id:number):Promise<Band|undefined> {
-        return this.Bands.find( x=> x.id == id);
-    }
-
-
+  async remove(id: string): Promise<void> {
+    await this.bandRepository.delete(id);
+  }
 }
