@@ -11,7 +11,7 @@ services:
       - app
 
   app:
-    image: node:16.13.0-alpine3.14
+    image: node:iron-alpine3.19
     container_name: app
     depends_on:
       - db
