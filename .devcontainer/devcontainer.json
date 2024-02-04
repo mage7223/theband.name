@@ -19,7 +19,8 @@
 				"christian-kohler.npm-intellisense",
 				"mquandalle.graphql",
 				"GitHub.codespaces",
-				"dsznajder.es7-react-js-snippets"
+				"dsznajder.es7-react-js-snippets",
+				"ashinzekene.nestjs"
 			]
 		}
 	},
