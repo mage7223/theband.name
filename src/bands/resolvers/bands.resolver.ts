@@ -1,11 +1,16 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BandService } from '../service/bands.service';
 import { Band } from '../models/band.model';
-import { BaseEntity, Like } from 'typeorm';
+import { BandService } from '../service/bands.service';
+import { BaseEntity, Like, Repository } from 'typeorm';
+import { Filter, FilterArgs } from 'nestjs-graphql-tools';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Resolver((of: any) => Band)
 export class BandResolver extends BaseEntity {
-  constructor(private bandService: BandService) {
+  constructor(
+    private bandService: BandService,
+    @InjectRepository(Band) private bandRepository: Repository<Band>,
+  ) {
     super();
   }
 
@@ -16,6 +21,15 @@ export class BandResolver extends BaseEntity {
         id,
       },
     });
+  }
+
+  @Query((returns) => Band, { name: 'band' })
+  async band(@Filter(() => [Band]) filter: FilterArgs) {
+    const qb = this.bandRepository
+      .createQueryBuilder('b')
+      .where(filter)
+      .distinct(true);
+    return qb.getMany();
   }
 
   @Query((returns) => [Band], { name: 'bands' })

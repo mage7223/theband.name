@@ -1,11 +1,15 @@
+/* eslint-disable prettier/prettier */
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../service/author.service';
-import { BaseEntity } from 'typeorm';
+import { BaseEntity, Repository } from 'typeorm';
+import { Filter, FilterArgs } from 'nestjs-graphql-tools';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Resolver((of: any) => Author)
 export class AuthorResolver extends BaseEntity {
-  constructor(private authorService: AuthorService) {
+  constructor(private authorService: AuthorService,
+    @InjectRepository(Author) private authorRepository: Repository<Author>){
     super();
   }
 
@@ -24,7 +28,16 @@ export class AuthorResolver extends BaseEntity {
     // return Author.find();
   }
 
-  @Mutation((returns) => Author)
+  @Query((returns) => [Author])
+  async authors (@Filter(() => [Author]) filter: FilterArgs) {
+      const qb = this.authorRepository.createQueryBuilder('a')
+      .where(filter)
+      .distinct(true);
+
+      return qb.getMany();
+    } 
+
+    @Mutation((returns) => Author)
   createAuthor(
     @Args({ name: 'name', type: () => String }) name: string,
     @Args({ name: 'email', type: () => String }) email: string,

@@ -16,12 +16,71 @@ type Band {
 }
 
 type Query {
-  band(id: Int!): Band!
+  band(where: BandResolver_Band_FilterInputType): Band!
   bands: [Band!]!
   bandByName(name: String!): Band!
   bandLikeName(name: String!): [Band!]!
   author(id: Int!): Author!
   getAuthors: [Author!]!
+  authors(where: AuthorResolver_Authors_FilterInputType): [Author!]!
+}
+
+input BandResolver_Band_FilterInputType {
+  id: Int_PropertyFilterInputType
+  name: String_PropertyFilterInputType
+  and: [BandResolver_BandFilterInputType!]
+  or: [BandResolver_BandFilterInputType!]
+}
+
+input Int_PropertyFilterInputType {
+  eq: Int
+  neq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  in: [Int!]
+  notin: [Int!]
+  like: String
+  notlike: String
+  between: [Int!]
+  notbetween: [Int!]
+  null: Boolean
+}
+
+input String_PropertyFilterInputType {
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  in: [String!]
+  notin: [String!]
+  like: String
+  notlike: String
+  between: [String!]
+  notbetween: [String!]
+  null: Boolean
+}
+
+input BandResolver_BandFilterInputType {
+  id: Int_PropertyFilterInputType
+  name: String_PropertyFilterInputType
+}
+
+input AuthorResolver_Authors_FilterInputType {
+  id: Int_PropertyFilterInputType
+  email: String_PropertyFilterInputType
+  name: String_PropertyFilterInputType
+  and: [AuthorResolver_AuthorsFilterInputType!]
+  or: [AuthorResolver_AuthorsFilterInputType!]
+}
+
+input AuthorResolver_AuthorsFilterInputType {
+  id: Int_PropertyFilterInputType
+  email: String_PropertyFilterInputType
+  name: String_PropertyFilterInputType
 }
 
 type Mutation {

@@ -80,3 +80,5 @@ $ npm run test:cov
 ## References
 
 [TypeORM](https://typeorm.io/) - ORM model used for Entity loading
+
+[NestJS GraphQL Tools](https://github.com/Adrinalin4ik/Nestjs-Graphql-Tools?tab=readme-ov-file#filters)
