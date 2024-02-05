@@ -4,12 +4,15 @@ import { BandService } from '../service/bands.service';
 import { BaseEntity, Like, Repository } from 'typeorm';
 import { Filter, FilterArgs } from 'nestjs-graphql-tools';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateBandType } from '../models/band.create.model';
+import { Author } from '../models/author.model';
 
 @Resolver((of: any) => Band)
 export class BandResolver extends BaseEntity {
   constructor(
     private bandService: BandService,
     @InjectRepository(Band) private bandRepository: Repository<Band>,
+    @InjectRepository(Author) private authorRepository: Repository<Author>,
   ) {
     super();
   }
@@ -56,8 +59,17 @@ export class BandResolver extends BaseEntity {
   }
 
   @Mutation((returns) => Band)
-  createBand(@Args({ name: 'name', type: () => String }) name: string) {
-    return this.bandService.create(name);
+  createBand(
+    @Args('createBandType', { type: () => CreateBandType })
+    createBandType: CreateBandType,
+  ) {
+    const newBand = new Band();
+    newBand.name = createBandType.name;
+
+    newBand.author = new Author();
+    newBand.author.email = createBandType.authorEmail;
+    const createdBand = this.bandRepository.create(newBand);
+    return createdBand;
   }
 }
 ``;

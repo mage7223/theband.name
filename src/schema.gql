@@ -84,6 +84,11 @@ input AuthorResolver_AuthorsFilterInputType {
 }
 
 type Mutation {
-  createBand(name: String!): Band!
+  createBand(createBandType: CreateBandType!): Band!
   createAuthor(name: String!, email: String!): Author!
+}
+
+input CreateBandType {
+  name: String!
+  authorEmail: String!
 }
