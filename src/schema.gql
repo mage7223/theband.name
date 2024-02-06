@@ -3,65 +3,30 @@
 # ------------------------------------------------------
 
 type Author {
-  id: Int!
-  email: String!
-  name: String
   bands: [Band!]!
+  email: String!
+  id: Int!
+  name: String
+}
+
+input AuthorResolver_AuthorsFilterInputType {
+  email: String_PropertyFilterInputType
+  id: Int_PropertyFilterInputType
+  name: String_PropertyFilterInputType
+}
+
+input AuthorResolver_Authors_FilterInputType {
+  and: [AuthorResolver_AuthorsFilterInputType!]
+  email: String_PropertyFilterInputType
+  id: Int_PropertyFilterInputType
+  name: String_PropertyFilterInputType
+  or: [AuthorResolver_AuthorsFilterInputType!]
 }
 
 type Band {
+  author: Author!
   id: Int!
   name: String!
-  author: Author!
-}
-
-type Query {
-  band(where: BandResolver_Band_FilterInputType): Band!
-  bands: [Band!]!
-  bandByName(name: String!): Band!
-  bandLikeName(name: String!): [Band!]!
-  author(id: Int!): Author!
-  getAuthors: [Author!]!
-  authors(where: AuthorResolver_Authors_FilterInputType): [Author!]!
-}
-
-input BandResolver_Band_FilterInputType {
-  id: Int_PropertyFilterInputType
-  name: String_PropertyFilterInputType
-  and: [BandResolver_BandFilterInputType!]
-  or: [BandResolver_BandFilterInputType!]
-}
-
-input Int_PropertyFilterInputType {
-  eq: Int
-  neq: Int
-  gt: Int
-  gte: Int
-  lt: Int
-  lte: Int
-  in: [Int!]
-  notin: [Int!]
-  like: String
-  notlike: String
-  between: [Int!]
-  notbetween: [Int!]
-  null: Boolean
-}
-
-input String_PropertyFilterInputType {
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  in: [String!]
-  notin: [String!]
-  like: String
-  notlike: String
-  between: [String!]
-  notbetween: [String!]
-  null: Boolean
 }
 
 input BandResolver_BandFilterInputType {
@@ -69,26 +34,61 @@ input BandResolver_BandFilterInputType {
   name: String_PropertyFilterInputType
 }
 
-input AuthorResolver_Authors_FilterInputType {
+input BandResolver_Band_FilterInputType {
+  and: [BandResolver_BandFilterInputType!]
   id: Int_PropertyFilterInputType
-  email: String_PropertyFilterInputType
   name: String_PropertyFilterInputType
-  and: [AuthorResolver_AuthorsFilterInputType!]
-  or: [AuthorResolver_AuthorsFilterInputType!]
-}
-
-input AuthorResolver_AuthorsFilterInputType {
-  id: Int_PropertyFilterInputType
-  email: String_PropertyFilterInputType
-  name: String_PropertyFilterInputType
-}
-
-type Mutation {
-  createBand(createBandType: CreateBandType!): Band!
-  createAuthor(name: String!, email: String!): Author!
+  or: [BandResolver_BandFilterInputType!]
 }
 
 input CreateBandType {
-  name: String!
   authorEmail: String!
+  name: String!
+}
+
+input Int_PropertyFilterInputType {
+  between: [Int!]
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  like: String
+  lt: Int
+  lte: Int
+  neq: Int
+  notbetween: [Int!]
+  notin: [Int!]
+  notlike: String
+  null: Boolean
+}
+
+type Mutation {
+  createAuthor(email: String!, name: String!): Author!
+  createBand(createBandType: CreateBandType!): Band!
+}
+
+type Query {
+  author(id: Int!): Author!
+  authors(where: AuthorResolver_Authors_FilterInputType): [Author!]!
+  band(where: BandResolver_Band_FilterInputType): Band!
+  bandByName(name: String!): Band!
+  bandLikeName(name: String!): [Band!]!
+  bands: [Band!]!
+  getAuthors: [Author!]!
+}
+
+input String_PropertyFilterInputType {
+  between: [String!]
+  eq: String
+  gt: String
+  gte: String
+  in: [String!]
+  like: String
+  lt: String
+  lte: String
+  neq: String
+  notbetween: [String!]
+  notin: [String!]
+  notlike: String
+  null: Boolean
 }

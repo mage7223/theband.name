@@ -25,6 +25,8 @@ import { Author } from './bands/models/author.model';
       driver: ApolloDriver,
       include: [BandModule],
       autoSchemaFile: 'src/schema.gql',
+      sortSchema: true,
+      playground: true,
     }),
   ],
   controllers: [],

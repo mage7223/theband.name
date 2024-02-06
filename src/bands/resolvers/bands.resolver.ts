@@ -59,17 +59,26 @@ export class BandResolver extends BaseEntity {
   }
 
   @Mutation((returns) => Band)
-  createBand(
+  async createBand(
     @Args('createBandType', { type: () => CreateBandType })
     createBandType: CreateBandType,
   ) {
     const newBand = new Band();
     newBand.name = createBandType.name;
 
-    newBand.author = new Author();
-    newBand.author.email = createBandType.authorEmail;
-    const createdBand = this.bandRepository.create(newBand);
-    return createdBand;
+    return await this.authorRepository
+      .findOne({ where: { email: createBandType.authorEmail } })
+      .then((author) => {
+        if (!author) {
+          author = new Author();
+          author.email = createBandType.authorEmail;
+        }
+        return this.authorRepository.save<Author>(author);
+      })
+      .then((author) => {
+        newBand.author = author;
+        return this.bandRepository.save<Band>(newBand);
+      });
   }
 }
 ``;

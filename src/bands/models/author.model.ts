@@ -24,6 +24,6 @@ export class Author extends BaseEntity {
   name: string;
 
   @Field(() => [Band])
-  @OneToMany(() => Band, (band) => band.author)
+  @OneToMany(() => Band, (band) => band.author, { cascade: true })
   bands: Band[];
 }
