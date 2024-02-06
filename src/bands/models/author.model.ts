@@ -11,6 +11,12 @@ import {
 @ObjectType()
 @Entity()
 export class Author extends BaseEntity {
+  constructor(email?: string, name?: string) {
+    super();
+    this.email = email ?? '';
+    this.name = name ?? '';
+  }
+
   @PrimaryGeneratedColumn('increment')
   @Field((type) => Int, { nullable: false })
   id: number;

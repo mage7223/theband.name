@@ -29,16 +29,16 @@ type Band {
   name: String!
 }
 
-input BandResolver_BandFilterInputType {
+input BandResolver_BandsFilterInputType {
   id: Int_PropertyFilterInputType
   name: String_PropertyFilterInputType
 }
 
-input BandResolver_Band_FilterInputType {
-  and: [BandResolver_BandFilterInputType!]
+input BandResolver_Bands_FilterInputType {
+  and: [BandResolver_BandsFilterInputType!]
   id: Int_PropertyFilterInputType
   name: String_PropertyFilterInputType
-  or: [BandResolver_BandFilterInputType!]
+  or: [BandResolver_BandsFilterInputType!]
 }
 
 input CreateBandType {
@@ -64,17 +64,12 @@ input Int_PropertyFilterInputType {
 
 type Mutation {
   createAuthor(email: String!, name: String!): Author!
-  createBand(createBandType: CreateBandType!): Band!
+  createBand(band: CreateBandType!): Band!
 }
 
 type Query {
-  author(id: Int!): Author!
   authors(where: AuthorResolver_Authors_FilterInputType): [Author!]!
-  band(where: BandResolver_Band_FilterInputType): Band!
-  bandByName(name: String!): Band!
-  bandLikeName(name: String!): [Band!]!
-  bands: [Band!]!
-  getAuthors: [Author!]!
+  bands(where: BandResolver_Bands_FilterInputType): [Band!]!
 }
 
 input String_PropertyFilterInputType {

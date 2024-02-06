@@ -12,7 +12,7 @@ cd .devcontainer
 docker compose -f docker-compose-dev.yml up -d
 cd ..
 npm install
-npm run start:dev
+npm run start:debug
 ```
 
 ### Popuate some bands
@@ -20,61 +20,50 @@ npm run start:dev
 navigate to [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
 ```graphql
-mutation AddBand(
-  $band0name: String = "Old Band",
-  $band1name: String = "New Band",
-  $band2name: String = "Jammin") {
-  b0: createBand(name:$band0name){
+mutation {
+  m1: createBand(band: {  name: "Sweet Sweet", authorEmail: "someone@somewhere.com"}){
     id
     name
+    author {
+      id
+      name
+      email
+    }
   }
-  b1: createBand(name:$band1name){
+  m2: createBand(band: {  name: "Sweet Sweeter", authorEmail: "someone@somewhere.com"}){
     id
     name
+    author {
+      id
+      name
+      email
+    }
   }
-  b2: createBand(name:$band2name){
+  m3: createBand(band: {  name: "Lamers", authorEmail: "noone@somewhere.com"}){
     id
     name
+    author {
+      id
+      name
+      email
+    }
   }
 }
 ```
 
 ### Query some bands
 ```graphql
-query BandQueries(
-  $bandNameEquals: String = "Jammin",
-  $bandNameLike: String = "Band"
-) {
-  q0: bands{
+query {
+  bands(where: { name: { like: "Sweet%"}}){
     id
     name
-  }
-  
-  q1: bandByName(name: $bandNameEquals){
-    id
-    name
-  }
-  
-  q2: bandLikeName(name: $bandNameLike){
-    id
-    name
+    author{
+      id
+      name
+      email
+    }
   }
 }
-```
-
-Null return types are not currently respected. The result types should be abstracted to a Null | Band type
-
-## Test ( Currently broken )
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## References
