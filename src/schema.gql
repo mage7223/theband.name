@@ -87,3 +87,8 @@ input String_PropertyFilterInputType {
   notlike: String
   null: Boolean
 }
+
+type Subscription {
+  authorAdded: Author!
+  bandAdded: Band!
+}

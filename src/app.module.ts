@@ -27,6 +27,9 @@ import { Author } from './bands/models/author.model';
       autoSchemaFile: 'src/schema.gql',
       sortSchema: true,
       playground: true,
+      subscriptions: {
+        'graphql-ws': true,
+      },
     }),
   ],
   controllers: [],

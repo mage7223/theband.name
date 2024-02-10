@@ -5,6 +5,7 @@ import {
   Query,
   ResolveField,
   Resolver,
+  Subscription,
 } from '@nestjs/graphql';
 import { Band } from '../models/band.model';
 import { BandService } from '../service/bands.service';
@@ -13,6 +14,9 @@ import { Filter } from 'nestjs-graphql-tools';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from '../models/author.model';
 import { CreateBandType } from '../models/band.create.model';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Resolver((of: any) => Band)
 export class BandResolver extends BaseEntity {
@@ -54,6 +58,13 @@ export class BandResolver extends BaseEntity {
         return this.authorRepository.save(new Author(band.authorEmail));
       });
     newBand.author = author;
-    return this.bandRepository.save(newBand);
+    const addedBand = await this.bandRepository.save(newBand);
+    pubSub.publish('bandAdded', { bandAdded: addedBand });
+    return addedBand;
+  }
+
+  @Subscription((returns) => Band, { name: 'bandAdded' })
+  bandAdded() {
+    return pubSub.asyncIterator('bandAdded');
   }
 }

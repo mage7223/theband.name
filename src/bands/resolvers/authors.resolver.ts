@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver, Subscription } from '@nestjs/graphql';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../service/author.service';
 import { BaseEntity, Repository } from 'typeorm';
 import { Filter, FilterArgs } from 'nestjs-graphql-tools';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Band } from '../models/band.model';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Resolver((of: any) => Author)
 export class AuthorResolver extends BaseEntity {
@@ -39,5 +42,10 @@ export class AuthorResolver extends BaseEntity {
         author: author,
       },
     });
+  }
+
+  @Subscription((returns) => Author)
+  authorAdded() {
+    return pubSub.asyncIterator('authorAdded');
   }
 }
