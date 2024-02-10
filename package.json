@@ -34,7 +34,9 @@
     "postgres": "^3.4.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.20"
+    "subscriptions-transport-ws": "^0.11.0",
+    "typeorm": "^0.3.20",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@apollo/gateway": "^2.4.0",

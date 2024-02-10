@@ -19,7 +19,7 @@ import { Author } from './bands/models/author.model';
       entities: [Band, Author],
       autoLoadEntities: true,
       synchronize: true,
-      logging: true,
+      logging: false,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

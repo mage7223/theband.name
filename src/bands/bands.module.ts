@@ -10,6 +10,6 @@ import { AuthorService } from './service/author.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Band, Author])],
   exports: [TypeOrmModule],
-  providers: [BandResolver, BandService, AuthorResolver, AuthorService],
+  providers: [BandResolver, BandService, AuthorResolver, AuthorService,],
 })
 export class BandModule {}

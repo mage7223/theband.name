@@ -28,11 +28,16 @@ export class AuthorResolver extends BaseEntity {
     } 
 
   @Mutation((returns) => Author)
-  createAuthor(
+  async createAuthor(
     @Args({ name: 'name', type: () => String }) name: string,
     @Args({ name: 'email', type: () => String }) email: string,
-  ) {
-    return this.authorService.create({ name, email });
+  ): Promise<Author> { 
+    const newAuthor = this.authorService.create({ name, email });
+    return this.authorService.create({ name, email })
+    .then((author) => {
+      pubSub.publish('authorAdded', { authorAdded: newAuthor }); 
+      return author;
+    });
   }
 
   @ResolveField((returns) => [Band], { name: 'bands' } as any)
@@ -44,8 +49,13 @@ export class AuthorResolver extends BaseEntity {
     });
   }
 
-  @Subscription((returns) => Author)
-  authorAdded() {
+  @Subscription(returns => Author, {
+    name: 'authorAdded',
+    defaultValue: null,
+    nullable: true,
+  })
+  async authorAdded() {
+    const called = true;
     return pubSub.asyncIterator('authorAdded');
   }
 }

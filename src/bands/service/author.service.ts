@@ -22,11 +22,11 @@ export class AuthorService {
     return this.authorRepository.find(filter);
   }
 
-  create(arg0: { name: string; email: string }) {
+  create(arg0: { name: string; email: string }): Promise<Author> {
     const author = new Author();
     author.name = arg0.name;
     author.email = arg0.email;
 
-    return this.authorRepository.save(author);
+    return this.authorRepository.save<Author>(author);
   }
 }

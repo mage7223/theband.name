@@ -89,6 +89,6 @@ input String_PropertyFilterInputType {
 }
 
 type Subscription {
-  authorAdded: Author!
+  authorAdded: Author
   bandAdded: Band!
 }
